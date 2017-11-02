@@ -42,11 +42,12 @@ let app = {
   },
 
   flipBack: function(elem) {
-    setTimeout(() => { elem.classList.remove('flipped'); }, app.animTime );
+    setTimeout(function() {
+      elem.classList.remove('flipped'); }, app.animTime );
   },
 
   hideTile: function(elem) {
-    setTimeout(() => {
+    setTimeout(function() {
       elem.classList.add('invisible'); }, app.animTime );
   },
 
@@ -57,16 +58,16 @@ let app = {
   // Board create
   generateCardsArray: function() {
     app.cards = [];
-    for (let i = 0; i < app.cardsTotal/2; i++) {
+    for (var i = 0; i < app.cardsTotal/2; i++) {
       app.cards.push(i);
       app.cards.push(i);
     }
   },
 
   shuffleCardsArray: function() {
-    let random = 0;
-    let temp = 0;
-    for (let i = 0; i < app.cards.length; i++) {
+    var random = 0;
+    var temp = 0;
+    for (var i = 0; i < app.cards.length; i++) {
       random = Math.round(Math.random() * i);
       temp = app.cards[random];
       app.cards[random] = app.cards[i];
@@ -75,16 +76,16 @@ let app = {
   },
 
   generateTiles: function() {
-    let content = "";
-    for (let i = 0; i < app.cards.length; i++) {
-      let cardNumber = app.cards[i];
-      let tile = document.createElement('div');
-      let front = document.createElement('div');
-      let back = document.createElement('div');
+    var content = "";
+    for (var i = 0; i < app.cards.length; i++) {
+      var cardNumber = app.cards[i];
+      var tile = document.createElement('div');
+      var front = document.createElement('div');
+      var back = document.createElement('div');
       tile.className = 'tile';
       tile.dataset.number = cardNumber;
 
-      let transition = 'all ' + app.animTime/1000 + 's linear 0s';
+      var transition = 'all ' + app.animTime/1000 + 's linear 0s';
       tile.style.transition = transition;
       tile.style.webkitTransition = transition;
       tile.style.oTransition = transition;
@@ -104,7 +105,7 @@ let app = {
   },
 
   clickEvent: function(e) {
-    let target = e.target;
+    var target = e.target;
     e.preventDefault();
     while (target != this) {
       if (target.matches('.tile:not(.flipped)')) {
@@ -117,7 +118,7 @@ let app = {
   },
 
   win: function() {
-    let answer = confirm('Поздравляем, вы выиграли! \r\n Еще раз?');
+    var answer = confirm('Поздравляем, вы выиграли! \r\n Еще раз?');
     app.board.innerHTML = '';
     if (answer) {
       app.start();
